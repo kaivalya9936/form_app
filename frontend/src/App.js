@@ -16,7 +16,7 @@ function App() {
      <Router>
         <div className='mw10 center bg-light-blue pa2 ph4-ns br3 shadow-3 mb3'>
           <div className='flex items-center'>
-            <Link className='pv1-ns f3 fw6 dim black-70 mr2 mr3-m mr4-1 dib link'  to="/admin">Admin</Link>
+            <Link className='pv1-ns f3 fw6 dim black-70 mr2 mr3-m mr4-1 dib link'  to="/admin/">Admin</Link>
             <Link className='pv1-ns f3 fw6 dim black-70 mr2 mr3-m mr4-1 dib link ' to="/user/" >User</Link>
           </div>
         </div>
@@ -26,13 +26,14 @@ function App() {
           <Route index element={<SignIn typeUser='admin'/>}/>
           <Route path='signin' element={<SignIn typeUser='admin'/>}/>
           <Route path='register' element={<Register typeUser='admin'/>}/>
+          <Route path='dashboard' element={<AdminDashboard/>}/>
         </Route>
         <Route path="/user/" element={<User/>} >
           <Route index className='center' element={<SignIn typeUser='user'/>}/>
           <Route path='signin' element={<SignIn typeUser='user'/>}/>
           <Route path='register' element={<Register typeUser='user'/>}/>
         </Route>
-        <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+        
         <Route path='/user/dashboard' element={<UserDashboard/>}/>
         </Routes>
       </Router>

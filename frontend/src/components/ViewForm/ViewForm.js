@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './ViewForm.css'
 
 const ViewForm =()=>{
-    console.log("called")
-    const [forms,setForms]=useState([]);
-    const [selectedForm, setSelectedForm] = useState({});
+    const [forms,setForms] = useState([]);
+    const [form,setForm]= useState({});
+    const [selectedForm, setSelectedForm] = useState([]);
 
-      fetch('http://localhost:3000/getforms', {
+      useEffect(()=>{
+        fetch('http://localhost:3000/getformnames', {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
       })
@@ -17,23 +18,45 @@ const ViewForm =()=>{
             return response.json()
           }
         })
-        .then(data => {
-          setForms(data);
-          console.log(data);
+        .then(forms => {
+          setForms(forms);
         });
+      },[]);
+      
+    const handleClick = (clickedform) => {
+        setSelectedForm(clickedform);
+    }
 
-    const handleClick = (form) => {
-        setSelectedForm(form);
-    };
+    useEffect(()=>{
+      if(Object.keys(selectedForm).length !==0){
+      const idstring = selectedForm._id
+      fetch('http://localhost:3000/getform/'+idstring, {
+      method: 'get',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        if (response.status === 400) {
+          return response.text()
+        } else {
+          return response.json()
+        }
+      })
+      .then(data => {
+        setForm(data);
+      });
+    }
 
+    },[selectedForm]);
+    
+    
     return(
         <div>
-            {Object.keys(selectedForm).length === 0 && (
+            {Object.keys(form).length === 0  && (
         <div>
           <p>All forms</p>
           <div className="tl">
             <ul>
-              {forms.map(form => (
+              {forms.map((form)=> (
                 <li key={form._id}>
                   <p className="pointer" onClick={() => handleClick(form)}>{form.name}</p>
                 </li>
@@ -42,10 +65,10 @@ const ViewForm =()=>{
           </div>
         </div>
         )}
-        {Object.keys(selectedForm).length !== 0 && (
+        {Object.keys(form).length !== 0 && (
             <div className="selected-form tl">
-                <h2>{selectedForm.name}</h2>
-                {selectedForm.questions.map((question, index) => (
+                <h2>{form.name}</h2>
+                {form.questions.map((question, index) => (
                     <div key={index}>
                         <h3>{index+1}.{question.question}</h3>
                         <ul>

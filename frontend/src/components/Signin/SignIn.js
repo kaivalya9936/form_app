@@ -7,9 +7,7 @@ function SignIn({typeUser}){
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [errorMessage,setErrorMessage] = useState('');
-    const [authenticated, setAuthenticated] = useState(
-        localStorage.getItem(localStorage.getItem("authenticated") || 'false')
-        );
+
 
     const onEmailChange =(event)=>{
         setEmail(event.target.value)
@@ -37,14 +35,12 @@ function SignIn({typeUser}){
         })
         .then(data => {
             if (data.name) {
-                localStorage.setItem("authenticated", typeUser);
                 navigate('/'+typeUser+"/dashboard");
             } else {
                 setErrorMessage(data);
             }
         })
     }
-    console.log(authenticated)
         return(
             (!typeUser)?
             <p> Loading...</p>

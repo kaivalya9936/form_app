@@ -1,0 +1,10 @@
+.selected-form {
+    background-color: #a9acb948;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+input{
+    margin-left: 0px;
+    margin-right: 0px;
+}

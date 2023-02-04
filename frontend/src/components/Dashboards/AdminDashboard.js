@@ -1,17 +1,16 @@
 import React, { useState, useMemo } from "react";
 import CreateForm from '../CreateForm/CreateForm';
-import ViewForm from '../ViewForm';
-import ViewResponses from '../ViewResponses';
+import ViewForm from '../ViewForm/ViewForm';
+import ViewResponses from '../ViewResponses/ViewResponses';
 
 const Dashboard = () => {
-  const [selectedOption, setSelectedOption] = useState("createForm");
-
+  const [selectedOption, setSelectedOption] = useState("createForm")
   const options = [
     { id: "createForm", label: "Create form" },
     { id: "viewForm", label: "View all forms" },
     { id: "viewResponses", label: "View responses" }
   ];
-
+  const obj={}
   const currentComponent = useMemo(() => {
     switch (selectedOption) {
       case "createForm":
@@ -23,8 +22,8 @@ const Dashboard = () => {
       default:
         return null;
     }
+    
   }, [selectedOption]);
-
   return (
     <div style={{ display: "flex" }}>
       <div className="ba" style={{
@@ -37,15 +36,13 @@ const Dashboard = () => {
       }}>
         {options.map(option => (
           <div key={option.id} style={{ marginBottom: "50px" }}>
-            <input
-              type="radio"
-              id={option.id}
-              name="options"
-              value={option.id}
-              checked={selectedOption === option.id}
-              onChange={() => setSelectedOption(option.id)}
-            />
-            <label htmlFor={option.id} style={{ cursor: "pointer" }}>{option.label}</label>
+            <p htmlFor={option.id} 
+            style={{ cursor: "pointer",color: option.id === selectedOption ? "gray" : "initial"}} 
+            onClick={() => {
+                setSelectedOption(option.id)
+              }}>
+              {option.label}
+              </p>
           </div>
         ))}
       </div>

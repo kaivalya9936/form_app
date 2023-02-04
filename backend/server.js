@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const { ObjectId } = require('mongodb');
 
 app.use(express.json());
 app.use(cors());
@@ -46,6 +47,12 @@ const questionSchema = new mongoose.Schema({
     questions: [questionSchema],
   });
 
+  const responseSchema = new mongoose.Schema({
+    form_id : ObjectId,
+    name : String,
+    responses : [String]
+
+  })
 // formSchema.plugin(autoIncrement.plugin, { model: 'Form', field: 'id', startAt: 1 });
 
 const Form = mongoose.model('Form', formSchema);
@@ -53,6 +60,8 @@ const Form = mongoose.model('Form', formSchema);
 const User = mongoose.model('User', userSchema);
 
 const Admin = mongoose.model('Admin', adminSchema);
+
+const Response = mongoose.model('Response',responseSchema);
 
 app.post('/createform', (req, res) => {
     const { name, questions } = req.body.form;
@@ -83,12 +92,53 @@ app.post('/createform', (req, res) => {
             });
     });
 
-app.get('/getforms', (req, res) => {
+app.get('/getformnames', (req, res) => {
     Form.find({},(err,forms)=>{
-        res.json(forms);
-        console.log(forms);
+        const names= forms.map((form)=>{
+        const {name, _id} = form
+        return {name,_id}})
+        res.json(names);
+    })
+    
+    });
+
+app.get('/getform/:_id', (req, res) => {
+    const {_id} = req.params;
+    Form.findById(_id,(err,form)=>{
+        res.json(form);
     })
     });
+
+app.get('/getresponses', (req, res) => {
+    console.log("hi",req.query.form_id);
+     const form_id = req.query.form_id;
+     Response.find({form_id}, (err, response) => {
+    if (err) {
+    res.status(400).json('User not found');
+    } else {
+        console.log(response)
+        res.json(response);
+    }
+    });
+    });
+    
+app.post('/saveresponse',(req,res)=>{
+    const {form_id, name, responses} = req.body.response;
+    console.log(req.body)
+    console.log(form_id,name,responses)
+    const newResponse = new Response({
+        form_id : form_id,
+        name : name,
+        responses : responses
+    })
+    newResponse.save((err, response) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json('Success');
+        }
+    });
+})
 
 app.get('/user/profile/:id', (req, res) => {
 const { id } = req.params;

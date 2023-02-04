@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import './CreateForm.css';
 
 const CreateForm = () => {
-  console.log("called create")
   const [formName,setFormName] = useState("");
   const [questions, setQuestions] = useState([
     {
