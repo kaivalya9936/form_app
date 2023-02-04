@@ -1,0 +1,35 @@
+.question {
+    margin-bottom: 4rem;
+  }
+  
+  label {
+    margin-bottom: 15px;
+    margin-right: 20px;
+    font-size: 1rem;
+  }
+  
+  input {
+    display: left;
+    width: 30%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin: 2px;
+    margin-bottom: 2px;
+    border: 1px solid lightgray;
+    border-radius: 0.25rem;
+  }
+  
+  button {
+    display: inline-block;
+    padding: 0.2 0.2rem;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    background-color: rgba(2, 63, 112, 0.349);
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
