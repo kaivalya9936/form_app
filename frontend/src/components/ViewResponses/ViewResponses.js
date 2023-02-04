@@ -78,13 +78,16 @@ const ViewResponses =()=>{
       <div>
           {Object.keys(form).length === 0  && (
       <div>
-        <p>All forms</p>
+        <h1>Select a form to view Responses</h1>
         <div className="tl">
           <ul>
             {forms.map((form)=> (
+              <>
+              <hr style={{width: "80%", margin: "0%"}} />
               <li key={form._id}>
                 <p className="pointer" onClick={() => handleClick(form)}>{form.name}</p>
               </li>
+              </>
             ))}
           </ul>
         </div>

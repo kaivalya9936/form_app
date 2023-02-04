@@ -53,13 +53,16 @@ const ViewForm =()=>{
         <div>
             {Object.keys(form).length === 0  && (
         <div>
-          <p>All forms</p>
+          <h1>Select form to view details</h1>
           <div className="tl">
             <ul>
               {forms.map((form)=> (
+                <>
+                <hr style={{width: "80%", margin: "0%"}} />
                 <li key={form._id}>
                   <p className="pointer" onClick={() => handleClick(form)}>{form.name}</p>
                 </li>
+                </>
               ))}
             </ul>
           </div>
@@ -70,6 +73,7 @@ const ViewForm =()=>{
                 <h2>{form.name}</h2>
                 {form.questions.map((question, index) => (
                     <div key={index}>
+                    <hr style={{width: "80%", margin: "0%"}} />
                         <h3>{index+1}.{question.question}</h3>
                         <ul>
                             {question.options.map((option, i) => (

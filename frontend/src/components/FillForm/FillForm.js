@@ -114,23 +114,26 @@ const FillForm =()=>{
         {Object.keys(form).length !== 0 && (
             <><div className="selected-form tl">
             <h2>{form.name}</h2>
-            <label className="b mv1 f5">
+            <label className="b mb3 f5">
               Enter your name:
               <input
                 type="text"
                 value={userName}
+                style={{padding:'0.25rem',margin:'0 10px 10px 10px'}}
                 onChange={(event) => handleNameChange(event)} />
             </label>
             {form.questions.map((question, index) => (
               <div className="" key={index}>
+              <hr style={{width: "80%", margin: "0% 10px"}} />
                 <h3>{index + 1}. {question.question}</h3>
                 <div className="tl">
                   {question.options.map((option, i) => (
-                    <div className="flex optionsdiv" key={i}>
+                    <div className="flex optionsdiv" style={{margin:'10px 10px 10px 10px'}}key={i}>
                       <input
                         type="radio"
                         name={question.question}
                         value={option}
+                        style={{width:'30px'}}
                         onChange={() => handleOptionChange(index, i)} />
                       {option}
                     </div>
