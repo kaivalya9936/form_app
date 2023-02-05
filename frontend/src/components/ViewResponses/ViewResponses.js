@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from "react";
 import './ViewResponses.css'
+import Analytics from "./Analytics/Analytics";
+
 const ViewResponses =()=>{
     const [forms,setForms]=useState([]);
     const [form,setForm]= useState({});
@@ -7,6 +9,8 @@ const ViewResponses =()=>{
 
     const[responses,setResponses] = useState([]);
     const [selectedResponse, setSelectedResponse] = useState({});
+
+    const [analytics, setAnalytics] = useState(false);
 
     useEffect(()=>{
       fetch('http://localhost:3000/getformnames', {
@@ -30,7 +34,7 @@ const ViewResponses =()=>{
   }
   useEffect(()=>{
     if(Object.keys(selectedForm).length !==0){
-    console.log("hello")
+    
     fetch('http://localhost:3000/getresponses?form_id='+selectedForm._id, {
     method: 'get',
     headers: { 'Content-Type': 'application/json' },
@@ -46,7 +50,6 @@ const ViewResponses =()=>{
       setResponses(data);
     });
     
-    console.log("responses",responses)
   }
   }
   ,[selectedForm])
@@ -73,7 +76,10 @@ const ViewResponses =()=>{
 
     },[selectedForm]);
 
-    console.log("responses",responses)
+    const handleAnalyticsClick= ()=>{
+      setAnalytics(!analytics)
+
+    }
     return(
       <div>
           {Object.keys(form).length === 0  && (
@@ -95,8 +101,15 @@ const ViewResponses =()=>{
       )}
       {Object.keys(form).length !== 0 && (
           <div className="selected-form tl">
+              <div className="flex">
+              <>
               <h2>{form.name}</h2>
+              </>
+              <p className="f4 pointer grow" style={{border:'1px solid',alignSelf:'flex-end', margin:'0 auto 15px auto'}}
+              onClick = {()=> handleAnalyticsClick()}> {analytics === false ? "Show Analytics" : "Hide Analytics"}</p>
+              </div>
               {responses.length > 0 ? (
+                analytics===false ?(
                 responses.map((response)=> (
                   <div key={response._id}>
                   <hr style={{width: "80%", margin: "0%"}} />
@@ -117,6 +130,9 @@ const ViewResponses =()=>{
                     )}
                   </div>
                 ))
+              ):
+              (<Analytics form={form} responses = {responses}/>)
+                
               ) : (
                 <p>No responses yet</p>
               )}
