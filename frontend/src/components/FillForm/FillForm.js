@@ -33,10 +33,15 @@ const FillForm =()=>{
     const handleOptionChange = (index, optionIndex) => {
       setResponses((prevResponses) => {
         let newResponses = [...prevResponses];
-        newResponses[index] = optionIndex;
+        console.log(newResponses[index])
+        if (newResponses[index] === optionIndex) {
+          newResponses[index] = -1;
+        } else {
+          newResponses[index] = optionIndex;
+        }
         return newResponses;
-      });
-    };
+      }); 
+    }
     const handleNameChange = (event) => {
       setUserName(event.target.value);
     };
@@ -99,13 +104,16 @@ const FillForm =()=>{
         <div>
             {Object.keys(form).length === 0  && (
         <div>
-          <p>Select a form to fill</p>
+          <h1>Select a form to fill</h1>
           <div className="tl">
             <ul>
               {forms.map((form)=> (
+                <>
+                <hr style={{width: "70%", margin: "0px"}} />
                 <li key={form._id}>
                   <p className="pointer" onClick={() => handleClick(form)}>{form.name}</p>
                 </li>
+                </>
               ))}
             </ul>
           </div>
@@ -134,7 +142,11 @@ const FillForm =()=>{
                         name={question.question}
                         value={option}
                         style={{width:'30px'}}
-                        onChange={() => handleOptionChange(index, i)} />
+                        checked={responses[index] === i}
+                        onChange={() => handleOptionChange(index, i)} 
+                        onClick={() => {if(responses[index]===i){handleOptionChange(index, i)}}}
+                        
+                        />
                       {option}
                     </div>
                   ))}

@@ -73,7 +73,7 @@ const ViewForm =()=>{
                 <h2>{form.name}</h2>
                 {form.questions.map((question, index) => (
                     <div key={index}>
-                    <hr style={{width: "80%", margin: "0%"}} />
+                    <hr style={{width: "80%", margin: "0px"}} />
                         <h3>{index+1}.{question.question}</h3>
                         <ul>
                             {question.options.map((option, i) => (

@@ -93,6 +93,7 @@ const CreateForm = () => {
                 onChange={(event) => handleNameChange(event)}
               />
             </label>
+            <hr style={{width: "80%", margin: "10px 10px 10px 10px"}} />
         </div>
 
       {questions.map((question, questionIndex) => (
@@ -128,10 +129,11 @@ const CreateForm = () => {
             </div>
           ))}
           <button className="mb3" onClick={() => addOption(questionIndex)}>Add Option</button>
+          <hr style={{width: "80%", margin: "10px 10px 10px 10px", border:"0.5px dashed #e5525287"}} />
         </div>
       ))}
       <div className="flex mv2 items-left">
-      <button onClick={addQuestion}>Add Question</button>
+      <button className="mb4"onClick={addQuestion}>Add Question</button>
       </div>
       <button className="ma2 f3"onClick={()=>{
         onSaveForm();

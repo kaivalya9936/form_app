@@ -12,16 +12,20 @@ import UserDashboard from './components/Dashboards/UserDashboard';
 
 function App() {
   return (
-    <div className="App bg-light-blue">
+    <div className="App bg-smokewhite">
      <Router>
-        <div className='mw10 center bg-light-blue pa2 ph4-ns br3 shadow-3 mb3'>
+        <div className='mw10 center bg-light-gray pa2 ph4-ns br3 shadow-3 mb3'>
           <div className='flex items-center'>
             <Link className='pv1-ns f3 fw6 dim black-70 mr2 mr3-m mr4-1 dib link'  to="/admin/">Admin</Link>
             <Link className='pv1-ns f3 fw6 dim black-70 mr2 mr3-m mr4-1 dib link ' to="/user/" >User</Link>
           </div>
         </div>
         <Routes>
-        <Route index element={<Admin/>}/>
+        <Route index element={
+        <div style={{alignSelf:'center'}}>
+        <h1>Welcome to Formsy! Login to get started</h1>
+        </div>
+        }/>
         <Route path="admin" element={<Admin/>} >
           <Route index element={<SignIn typeUser='admin'/>}/>
           <Route path='signin' element={<SignIn typeUser='admin'/>}/>
