@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import './CreateForm.css';
 
-const CreateForm = () => {
+
+const CreateForm = ({handleSelectedOption}) => {
+  const navigate = useNavigate();
   const [formName,setFormName] = useState("");
   const [questions, setQuestions] = useState([
     {
@@ -57,7 +60,42 @@ const CreateForm = () => {
   const onSaveForm = (event) =>{
     
     const questionSet = questions.map((question)=> question)
+    let flag = false
+    let message=""
+    
+    if(questionSet.length===0){
+      flag= true
+      message = "Cannot have zero questions in a form!!"
+    }
+    questionSet.forEach((question)=>{
+      if(question.question === "")
+      {
+        flag = true;
+        message="Cannot have empty question field"
+      }
+      if(question.options.length === 0 && !flag){
+        flag = true
+        message ="Cannot have zero options for a question"
+      }
+      if(!flag){
+      question.options.forEach((option)=>{
+        if(option === ""){
+          flag = true;
+          message = "Option field cannot be empty!"
+        }
+      })
+    }
+    })
 
+    if(formName ===""){
+      flag = true;
+      message = "Please provide a name for this form!!"
+    }
+    console.log(message)
+    if(flag){
+      alert(message)
+    }
+    else{
     const form = {
       name : formName,
       questions: questionSet
@@ -78,8 +116,13 @@ const CreateForm = () => {
             }
         })
         .then(data => {
-            alert(data)
+          alert(data)
+          if(data==='Success'){
+          handleSelectedOption("")
+          }
+            
         })
+      }
   }
   
   return (
