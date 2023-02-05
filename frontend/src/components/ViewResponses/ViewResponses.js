@@ -1,9 +1,9 @@
 import React, { useState,useEffect } from "react";
 import './ViewResponses.css'
 import Analytics from "./Analytics/Analytics";
+import FormNames from '../FormTools/FormNames'
 
 const ViewResponses =()=>{
-    const [forms,setForms]=useState([]);
     const [form,setForm]= useState({});
     const [selectedForm, setSelectedForm] = useState({});
 
@@ -11,27 +11,11 @@ const ViewResponses =()=>{
     const [selectedResponse, setSelectedResponse] = useState({});
 
     const [analytics, setAnalytics] = useState(false);
-
-    useEffect(()=>{
-      fetch('http://localhost:3000/getformnames', {
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => {
-        if (response.status === 400) {
-          return response.text()
-        } else {
-          return response.json()
-        }
-      })
-      .then(forms => {
-        setForms(forms);
-      });
-    },[]);
     
   const handleClick = (clickedform) => {
       setSelectedForm(clickedform);
   }
+
   useEffect(()=>{
     if(Object.keys(selectedForm).length !==0){
     
@@ -86,16 +70,7 @@ const ViewResponses =()=>{
       <div>
         <h1>Select a form to view Responses</h1>
         <div className="tl">
-          <ul>
-            {forms.map((form)=> (
-              <>
-              <hr style={{width: "80%", margin: "0%"}} />
-              <li key={form._id}>
-                <p className="pointer" onClick={() => handleClick(form)}>{form.name}</p>
-              </li>
-              </>
-            ))}
-          </ul>
+        <FormNames handleClick={handleClick}/>
         </div>
       </div>
       )}
