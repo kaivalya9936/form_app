@@ -17,7 +17,11 @@ const Dashboard = () => {
         case "fillForm":
           return <FillForm />;
         default:
-          return null;
+          return(
+            <div>
+              <h1> Select an option to get started</h1>
+            </div>
+            );
       }
       
     }, [selectedOption]);
@@ -33,10 +37,10 @@ const Dashboard = () => {
         }}>
           {options.map(option => (
             <div key={option.id} style={{ marginBottom: "50px" }}>
-              <p htmlFor={option.id} 
+              <p className="f3" htmlFor={option.id} 
               style={{ cursor: "pointer",color: option.id === selectedOption ? "gray" : "initial"}} 
               onClick={() => {
-                  setSelectedOption(option.id)
+                  selectedOption !== option.id ? setSelectedOption(option.id) : setSelectedOption("")
                 }}>
                 {option.label}
                 </p>
