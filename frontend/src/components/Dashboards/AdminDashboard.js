@@ -11,11 +11,14 @@ const Dashboard = () => {
     { id: "viewForm", label: "View all forms" },
     { id: "viewResponses", label: "View responses" }
   ];
-  const obj={}
+
+  const handleSelectedOption=(data)=>{
+    setSelectedOption(data);
+  }
   const currentComponent = useMemo(() => {
     switch (selectedOption) {
       case "createForm":
-        return <CreateForm />;
+        return <CreateForm handleSelectedOption={handleSelectedOption}/>;
       case "viewForm":
         return <ViewForm />;
       case "viewResponses":
