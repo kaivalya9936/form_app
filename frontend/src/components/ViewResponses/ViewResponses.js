@@ -105,7 +105,7 @@ const ViewResponses =()=>{
               <>
               <h2>{form.name}</h2>
               </>
-              <p className="f4 pointer grow" style={{border:'1px solid',alignSelf:'flex-end', margin:'0 auto 15px auto'}}
+              <p className="f4 pointer grow" style={{border:'1px solid',padding:'4px 4px',alignSelf:'flex-end', margin:'0 auto 15px auto'}}
               onClick = {()=> handleAnalyticsClick()}> {analytics === false ? "Show Analytics" : "Hide Analytics"}</p>
               </div>
               {responses.length > 0 ? (
