@@ -23,7 +23,6 @@ const adminSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    entries: {type: Number, default: 0},
     joined: {type: Date, default: Date.now()}
 });
 
