@@ -28,11 +28,6 @@ const adminSchema = new mongoose.Schema({
 });
 
 
-// const autoIncrement = require('mongoose-auto-increment');
-
-// const connection = mongoose.createConnection('mongodb://127.0.0.1:27017/form_app');
-// autoIncrement.initialize(connection);
-
 const questionSchema = new mongoose.Schema({
     question: {
       type: String,
@@ -40,20 +35,19 @@ const questionSchema = new mongoose.Schema({
     options: [String],
   });
   
-  const formSchema = new mongoose.Schema({
+const formSchema = new mongoose.Schema({
     name: {
       type: String,
     },
     questions: [questionSchema],
   });
 
-  const responseSchema = new mongoose.Schema({
+const responseSchema = new mongoose.Schema({
     form_id : ObjectId,
     name : String,
     responses : [String]
 
   })
-// formSchema.plugin(autoIncrement.plugin, { model: 'Form', field: 'id', startAt: 1 });
 
 const Form = mongoose.model('Form', formSchema);
 
@@ -140,18 +134,6 @@ app.post('/saveresponse',(req,res)=>{
     });
 })
 
-app.get('/user/profile/:id', (req, res) => {
-const { id } = req.params;
-User.findById(id, (err, user) => {
-if (err) {
-res.status(400).json('User not found');
-} else {
-res.json(user);
-}
-});
-});
-
-
 app.post('/user/register', (req, res) => {
     const { name, email, password } = req.body;
     User.findOne({ email }, (err, user) => {
@@ -201,19 +183,6 @@ app.post('/user/signin', (req, res) => {
     });
     });
 
-
-app.get('/admin/profile/:id', (req, res) => {
-    const { id } = req.params;
-    Admin.findById(id, (err, user) => {
-    if (err) {
-    res.status(400).json('Admin not found');
-    } else {
-    res.json(user);
-    }
-    });
-    });
-    
-    
 app.post('/admin/register', (req, res) => {
     const { name, email, password } = req.body;
     Admin.findOne({ email }, (err, user) => {
@@ -263,7 +232,6 @@ app.post('/admin/signin', (req, res) => {
     });
     });
     
-
 app.listen(3000, () => {
     console.log("App running on port 3000")
 });
