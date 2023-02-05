@@ -35,7 +35,7 @@ function PieChart({ chartData,text }) {
           hoverBorderWidth:1.5,
           plugins: {
             legend:{
-              display:false,
+              display:true,
               position:"right"
             },
             colors: {

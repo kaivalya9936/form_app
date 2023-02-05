@@ -70,7 +70,12 @@ const ViewForm =()=>{
         )}
         {Object.keys(form).length !== 0 && (
             <div className="selected-form tl">
+                <div style={{display:'flex'}}>
                 <h2>{form.name}</h2>
+                <button className="ma2 f5" style={{margin:'10px 10px 10px auto'}}onClick={() => {
+                setForm({});
+              } }>Back to forms</button>
+                </div>
                 {form.questions.map((question, index) => (
                     <div key={index}>
                     <hr style={{width: "80%", margin: "0px"}} />

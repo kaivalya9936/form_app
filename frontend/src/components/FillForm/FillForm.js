@@ -45,8 +45,9 @@ const FillForm =()=>{
     const handleNameChange = (event) => {
       setUserName(event.target.value);
     };
-  console.log(responses)
+
     const onSubmitResponses =(event) =>{
+      setForm({})
       const form_id = form._id;
       const name = userName;
       const response ={
@@ -121,7 +122,12 @@ const FillForm =()=>{
         )}
         {Object.keys(form).length !== 0 && (
             <><div className="selected-form tl">
+            <div style={{display:'flex'}}>
             <h2>{form.name}</h2>
+            <button className="ma2 f5" style={{margin:'10px 10px 10px auto'}}onClick={() => {
+                setForm({});
+              } }>Back to forms</button>
+              </div>
             <label className="b mb3 f5">
               Enter your name:
               <input
@@ -155,9 +161,10 @@ const FillForm =()=>{
             ))}
           </div>
           <div>
-              <button className="ma2 f3" onClick={() => {
+              <button 
+              className="ma2 f3" onClick={() => {
                 onSubmitResponses();
-              } }>Save</button>
+              } }>Save </button>
             </div></>
                           
             )}
