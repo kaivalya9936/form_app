@@ -17,7 +17,14 @@ To get started with Formsy, you will need to have Node.js and npm installed on y
 
 * Clone the repository from https://github.com/kaivalya9936/form_app
 
-* Navigate to the root directory of the project and run ```npm install``` to install all the dependencies.
+### Backend dependencies
+
+Run the following code in the terminal open in the root directory 
+
+```
+cd backend
+npm install
+```
 
 Start the backend server by running 
 ```
@@ -26,7 +33,14 @@ npm start
 ```
 Note: Run both of the above commands in differnt terminals.
 
-* Start the frontend by running ```npm start```
+### Frontend dependencies
+Run the following commands in a separate terminal
+```
+cd frontend
+npm install
+```
+
+Start the frontend by running ```npm start```
  
 The application should now be running on http://localhost:3000
 
