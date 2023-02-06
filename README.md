@@ -11,7 +11,7 @@ I have used MongoDB as my database for storing and retrieving data, and have use
 
 I have used ReactJS as my ferontend to manage routing, and display various components to users in an interactive manner.
 
-##Getting 
+## Getting Started
 
 To get started with Formsy, you will need to have Node.js and npm installed on your machine.
 
